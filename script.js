@@ -21,19 +21,26 @@ navigator.geolocation.getCurrentPosition(
 
     //adding Leaflet
     const map = L.map('map').setView(coords, 13);
-
-    //http://tile.thunderforest.com/cycle/${z}/${x}/${y}.png
-    //http://b.tile.openstreetmap.fr/hot/${z}/${x}/${y}.png
-
-    L.tileLayer('https://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png', {
+    //console.log(map);
+    L.tileLayer('http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png', {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 
-    L.marker(coords)
-      .addTo(map)
-      .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-      .openPopup();
+    map.on('click', function(e){
+        const {lat: latitude, lng: longitude} = e.latlng;
+        L.marker([latitude, longitude])
+        .addTo(map)
+        .bindPopup(L.popup({
+            maxWidth: 250,
+            minWidth: 100,
+            autoClose: false,
+            closeOnClick: false,
+            closeButton: false,
+            className: 'running-popup'
+        }).setContent('My Workout'))
+        .openPopup();
+    })
   },
   function () {
     alert(`Location Not Enabled OR Found`);
