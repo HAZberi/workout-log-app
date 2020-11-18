@@ -9,7 +9,6 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 
-
 class Workout {
   date = new Date();
   id = (Date.now() + '').slice(-7);
@@ -64,13 +63,16 @@ class App {
   #zoomLevel = 13;
 
   constructor() {
-      //object initialization through class App methods
+    //object initialization through class App methods
     this._getPosition();
     this._getLocalStorage();
-        //All event listners
+    //All event listners
     form.addEventListener('submit', this._newWorkout.bind(this));
     inputType.addEventListener('change', this._toggleElevationField);
-    containerWorkouts.addEventListener('click', this._moveToPopUp.bind(this));
+    containerWorkouts.addEventListener('click', function(e){
+        this._moveToPopUp(e);
+        this._deleteWorkout(e);
+    }.bind(this));
     //Note: binding this keyword to callback is important when working with classes
   }
 
@@ -82,7 +84,8 @@ class App {
       }
     );
   }
-  _loadMap(pos) {//callback function
+  _loadMap(pos) {
+    //callback function
     const { latitude } = pos.coords;
     const { longitude } = pos.coords;
     const coords = [latitude, longitude];
@@ -101,12 +104,13 @@ class App {
     this._displayLocalStorageMapMarkers();
     //setting the map view and zoom level based on current location
     this.#map.setView(coords, this.#zoomLevel, {
-        animate: false
+      animate: false,
     });
-    //listen to any click event on the map and display the workout form    
+    //listen to any click event on the map and display the workout form
     this.#map.on('click', this._showForm.bind(this));
   }
-  _showForm(e) {//callback function
+  _showForm(e) {
+    //callback function
     //getting lat lng of where user clicked
     const { lat: latitude, lng: longitude } = e.latlng;
     //if current marker is not attached to a workout, remove it -- else update current marker
@@ -115,8 +119,9 @@ class App {
     //show the form
     form.classList.remove('hidden');
   }
-  _toggleElevationField() {//callback function
-      //to toggle between cadence and elevation fields
+  _toggleElevationField() {
+    //callback function
+    //to toggle between cadence and elevation fields
     inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
     inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
   }
@@ -194,7 +199,9 @@ class App {
   _renderWorkoutOnList(workout) {
     let html = `
     <li class="workout workout--${workout.type}" data-id="${workout.id}">
+        <span class="workout__delete"><i class="far fa-trash-alt"></i></span>
       <h2 class="workout__title">${workout.description}</h2>
+      <button class="workout__edit">Edit</button>
       <div class="workout__details">
         <span class="workout__icon">${
           workout.type === 'running' ? '🏃‍♂️' : '🚴‍'
@@ -213,7 +220,7 @@ class App {
         `
         <div class="workout__details">
         <span class="workout__icon">⚡️</span>
-        <span class="workout__value">${workout.pace.toFixed(2)}</span>
+        <span class="workout__value">${workout.pace.toFixed(1)}</span>
         <span class="workout__unit">min/km</span>
       </div>
       <div class="workout__details">
@@ -229,7 +236,7 @@ class App {
         `
         <div class="workout__details">
         <span class="workout__icon">⚡️</span>
-        <span class="workout__value">${workout.speed.toFixed(2)}</span>
+        <span class="workout__value">${workout.speed.toFixed(1)}</span>
         <span class="workout__unit">km/h</span>
       </div>
       <div class="workout__details">
@@ -269,27 +276,42 @@ class App {
     //all the inherited properties and methods will be lost
     //Experiment by creating public methods eg: click()
   }
-  _displayLocalStorageMapMarkers(){
+  _displayLocalStorageMapMarkers() {
     //display and set workouts markers on the map, if any when the map loads for the first time
-    if(!this.#workouts.length>1) return console.log(`No workouts found in local storage`);
+    if (!this.#workouts.length > 1)
+      return console.log(`No workouts found in local storage`);
     this.#workouts.forEach(workout => {
-        this.#marker = L.marker(workout.coords).addTo(this.#map);
-        this._renderWorkoutOnMap(workout)
+      this.#marker = L.marker(workout.coords).addTo(this.#map);
+      this._renderWorkoutOnMap(workout);
     });
   }
   _getLocalStorage() {
     //parse data using JSON
     const data = JSON.parse(localStorage.getItem('workouts'));
     //display workouts on the list
-    if(!data) return
+    if (!data) return;
     this.#workouts = data;
     this.#workouts.forEach(workout => this._renderWorkoutOnList(workout));
   }
-  reset(){
-      //the only public method 
-      //direct access in console through app object
-      localStorage.removeItem('workouts');
-      location.reload();
+  _deleteWorkout(e){
+    if(!e.target.closest('.workout__delete')) return
+    const workout = e.target.closest('.workout');
+    workout.style.display = 'none';
+    const workoutId = workout.dataset.id;
+    const workoutToDelete = this.#workouts.find(workout => workout.id === workoutId);
+    this.#workouts.splice(this.#workouts.indexOf(workoutToDelete), 1);
+    this.#map.eachLayer(function(layer){
+        if(layer.options.attribution) return
+        layer.remove();
+    });
+    this._displayLocalStorageMapMarkers();
+    this._setLocalStorage();
+  }
+  reset() {
+    //the only public method
+    //direct access in console through app object
+    localStorage.removeItem('workouts');
+    location.reload();
   }
 }
 
