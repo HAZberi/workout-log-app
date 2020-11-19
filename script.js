@@ -8,6 +8,7 @@ const inputDistance = document.querySelector('.form__input--distance');
 const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
+const deleteAll = document.querySelector('.workouts__deleteAll');
 
 class Workout {
   date = new Date();
@@ -66,13 +67,18 @@ class App {
     //object initialization through class App methods
     this._getPosition();
     this._getLocalStorage();
+    this._checkExistingWorkouts();
     //All event listners
     form.addEventListener('submit', this._newWorkout.bind(this));
     inputType.addEventListener('change', this._toggleElevationField);
-    containerWorkouts.addEventListener('click', function(e){
+    containerWorkouts.addEventListener(
+      'click',
+      function (e) {
         this._moveToPopUp(e);
         this._deleteWorkout(e);
-    }.bind(this));
+      }.bind(this)
+    );
+    deleteAll.addEventListener('click', this._deleteAllWorkouts.bind(this));
     //Note: binding this keyword to callback is important when working with classes
   }
 
@@ -149,7 +155,7 @@ class App {
       const cadence = Number(inputCadence.value);
       //Check if the input is valid
       if (!inputValidations(distance, duration, cadence))
-        return alert(`Please enter positive numbers only`); //guard clause
+        return alert(`Postive Numbers Only \n \n   OR   \n \nMissing Value`); //guard clause
 
       //create a running object
       workout = new Running(coords, distance, duration, cadence);
@@ -159,7 +165,7 @@ class App {
       const elevation = Number(inputElevation.value);
       //Check if the input is valid
       if (!inputValidations(distance, duration) && isNaN(elevation))
-        return alert(`Please enter positive numbers only`); //guard clause
+        return alert(`Postive Numbers Only \n \n   OR   \n \nMissing Value`); //guard clause
 
       //create a cycling object
       workout = new Cycling(coords, distance, duration, elevation);
@@ -173,6 +179,9 @@ class App {
 
     //Render workout on the list
     this._renderWorkoutOnList(workout);
+
+    //Check if there is need to display DeleteAll or Sort buttons
+    this._checkExistingWorkouts();
 
     //Hide form and clear input fields
     this._resetFields();
@@ -236,7 +245,7 @@ class App {
         `
         <div class="workout__details">
         <span class="workout__icon">⚡️</span>
-        <span class="workout__value">${workout.speed.toFixed(1)}</span>
+        <span class="workout__value">${workout.speed?.toFixed(1)}</span>
         <span class="workout__unit">km/h</span>
       </div>
       <div class="workout__details">
@@ -285,6 +294,13 @@ class App {
       this._renderWorkoutOnMap(workout);
     });
   }
+  _editWorkout(e){
+    if(!e.target.closest('.workout__edit')) return;
+    const workout = e.target.closest('.workout');
+    workout.style.display = 'none';    
+    form.classList.remove('hidden');
+    setTimeout(() => (form.style.display = 'grid'), 1000);
+  }
   _getLocalStorage() {
     //parse data using JSON
     const data = JSON.parse(localStorage.getItem('workouts'));
@@ -293,19 +309,32 @@ class App {
     this.#workouts = data;
     this.#workouts.forEach(workout => this._renderWorkoutOnList(workout));
   }
-  _deleteWorkout(e){
-    if(!e.target.closest('.workout__delete')) return
+  _deleteWorkout(e) {
+    if (!e.target.closest('.workout__delete')) return;
     const workout = e.target.closest('.workout');
     workout.style.display = 'none';
     const workoutId = workout.dataset.id;
-    const workoutToDelete = this.#workouts.find(workout => workout.id === workoutId);
+    const workoutToDelete = this.#workouts.find(
+      workout => workout.id === workoutId
+    );
     this.#workouts.splice(this.#workouts.indexOf(workoutToDelete), 1);
-    this.#map.eachLayer(function(layer){
-        if(layer.options.attribution) return
-        layer.remove();
+    this.#map.eachLayer(function (layer) {
+      if (layer.options.attribution) return;
+      layer.remove();
     });
     this._displayLocalStorageMapMarkers();
     this._setLocalStorage();
+    this._checkExistingWorkouts();
+  }
+  _deleteAllWorkouts(e) {
+    this.reset();
+  }
+  _checkExistingWorkouts() {
+    if (this.#workouts.length < 1) {
+      deleteAll.style.display = 'none';
+    } else {
+      deleteAll.style.display = 'flex';
+    }
   }
   reset() {
     //the only public method

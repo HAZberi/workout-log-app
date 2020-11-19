@@ -66,6 +66,27 @@ a:visited {
   width: 0;
 }
 
+.workouts__deleteAll {
+  border-radius: 5px;
+  border: hidden;
+  color: var(--color-dark--1);
+  background-color: var(--color-light--3);
+  cursor: pointer;
+  align-self: flex-end;
+  font-weight: bolder;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.workouts__deleteAll:hover{
+  background-color: var(--color-dark--2);
+  color: var(--color-light--3);
+}
+
+.workouts__deleteAll:focus {
+  outline: none;
+}
+
 .workout {
   background-color: var(--color-dark--2);
   border-radius: 5px;
@@ -119,6 +140,9 @@ li:hover .workout__delete{
   font-weight: bolder;
   padding: 0.5rem 0.75rem;
   grid-column: 5 / span 1;
+}
+.workout__edit:focus {
+  outline: none;
 }
 .workout__edit:hover{
   background-color: var(--color-dark--1);
