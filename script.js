@@ -212,7 +212,7 @@ class App {
     <li class="workout workout--${workout.type}" data-id="${workout.id}">
         <span class="workout__delete"><i class="far fa-trash-alt"></i></span>
       <h2 class="workout__title">${workout.description}</h2>
-      <button class="workout__edit">Edit</button>
+      <button class="workout__edit"><i class="fas fa-edit"></i></button>
       <div class="workout__details">
         <span class="workout__icon">${
           workout.type === 'running' ? '🏃‍♂️' : '🚴‍'

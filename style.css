@@ -128,24 +128,22 @@ li:hover .workout__delete{
 }
 
 .workout__edit {
-  border-radius: 5px;
   border: hidden;
-  color: var(--color-dark--1);
-  background-color: var(--color-light--3);
+  color: var(--color-light--1);
+  background-color: transparent;
   cursor: pointer;
-  /* margin-top: 1.5rem;
-  margin-left: 3rem; */
+  font-size: large;
   align-self: end;
   justify-self: end;
   font-weight: bolder;
-  padding: 0.5rem 0.75rem;
+  margin-bottom: 0.25rem;
   grid-column: 5 / span 1;
 }
 .workout__edit:focus {
   outline: none;
 }
 .workout__edit:hover{
-  background-color: var(--color-dark--1);
+  background-color: transparent;
   color: var(--color-light--3);
 }
 .workout__details {
