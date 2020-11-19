@@ -76,6 +76,7 @@ class App {
       function (e) {
         this._moveToPopUp(e);
         this._deleteWorkout(e);
+        this._editWorkout(e);
       }.bind(this)
     );
     deleteAll.addEventListener('click', this._deleteAllWorkouts.bind(this));
@@ -124,6 +125,7 @@ class App {
     this.#marker = L.marker([latitude, longitude]).addTo(this.#map);
     //show the form
     form.classList.remove('hidden');
+    inputType.focus();
   }
   _toggleElevationField() {
     //callback function
@@ -173,7 +175,7 @@ class App {
 
     //add the new object to workout array
     this.#workouts.push(workout);
-
+    
     //Render workout on a map as a marker
     this._renderWorkoutOnMap(workout);
 
@@ -294,12 +296,35 @@ class App {
       this._renderWorkoutOnMap(workout);
     });
   }
+  _populateForm(workout){
+    inputType.value = workout.type;
+    inputDistance.value = workout.distance;
+    inputDuration.value = workout.duration;
+    this.#marker = L.marker(workout.coords).addTo(this.#map);;
+    if (workout.type === 'running'){
+      inputCadence.value = workout.cadence;
+      inputCadence.closest('.form__row').classList.remove('form__row--hidden');
+      inputElevation.closest('.form__row').classList.add('form__row--hidden');
+    }
+    if(workout.type === 'cycling'){
+      inputElevation.value = workout.elevationGain;
+      inputElevation.closest('.form__row').classList.remove('form__row--hidden');
+      inputCadence.closest('.form__row').classList.add('form__row--hidden');
+    }
+    inputDistance.focus();
+  }
   _editWorkout(e){
     if(!e.target.closest('.workout__edit')) return;
     const workout = e.target.closest('.workout');
     workout.style.display = 'none';    
     form.classList.remove('hidden');
     setTimeout(() => (form.style.display = 'grid'), 1000);
+    const workoutId = workout.dataset.id;
+    const workoutToEdit = this.#workouts.find(
+      workout => workout.id === workoutId
+    );
+    this._populateForm(workoutToEdit);
+    this.#workouts.splice(this.#workouts.indexOf(workoutToEdit), 1);
   }
   _getLocalStorage() {
     //parse data using JSON
@@ -343,5 +368,4 @@ class App {
     location.reload();
   }
 }
-
 const app = new App();
