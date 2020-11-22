@@ -9,6 +9,7 @@ const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 const deleteAll = document.querySelector('.workouts__deleteAll');
+const sortBy = document.querySelector('.sort-by');
 
 class Workout {
   date = new Date();
@@ -80,6 +81,7 @@ class App {
       }.bind(this)
     );
     deleteAll.addEventListener('click', this._deleteAllWorkouts.bind(this));
+    sortBy.addEventListener('change', this._sortBy.bind(this));
     //Note: binding this keyword to callback is important when working with classes
   }
 
@@ -175,7 +177,7 @@ class App {
 
     //add the new object to workout array
     this.#workouts.push(workout);
-    
+
     //Render workout on a map as a marker
     this._renderWorkoutOnMap(workout);
 
@@ -296,27 +298,29 @@ class App {
       this._renderWorkoutOnMap(workout);
     });
   }
-  _populateForm(workout){
+  _populateForm(workout) {
     inputType.value = workout.type;
     inputDistance.value = workout.distance;
     inputDuration.value = workout.duration;
-    this.#marker = L.marker(workout.coords).addTo(this.#map);;
-    if (workout.type === 'running'){
+    this.#marker = L.marker(workout.coords).addTo(this.#map);
+    if (workout.type === 'running') {
       inputCadence.value = workout.cadence;
       inputCadence.closest('.form__row').classList.remove('form__row--hidden');
       inputElevation.closest('.form__row').classList.add('form__row--hidden');
     }
-    if(workout.type === 'cycling'){
+    if (workout.type === 'cycling') {
       inputElevation.value = workout.elevationGain;
-      inputElevation.closest('.form__row').classList.remove('form__row--hidden');
+      inputElevation
+        .closest('.form__row')
+        .classList.remove('form__row--hidden');
       inputCadence.closest('.form__row').classList.add('form__row--hidden');
     }
     inputDistance.focus();
   }
-  _editWorkout(e){
-    if(!e.target.closest('.workout__edit')) return;
+  _editWorkout(e) {
+    if (!e.target.closest('.workout__edit')) return;
     const workout = e.target.closest('.workout');
-    workout.style.display = 'none';    
+    workout.style.display = 'none';
     form.classList.remove('hidden');
     setTimeout(() => (form.style.display = 'grid'), 1000);
     const workoutId = workout.dataset.id;
@@ -360,6 +364,25 @@ class App {
     } else {
       deleteAll.style.display = 'flex';
     }
+  }
+  _sortByData(data) {
+    const newOrder = this.#workouts.sort((wa, wb) => wa[data] - wb[data]);
+    const currentWorkouts = document.querySelectorAll('.workout');
+    currentWorkouts.forEach(el => (el.style.display = 'none'));
+    newOrder.forEach(el => this._renderWorkoutOnList(el));
+  }
+  _sortByDate() {
+    const newOrder = this.#workouts.sort(
+      (wa, wb) => new Date(wb.date) - new Date(wa.date)
+    );
+    const currentWorkouts = document.querySelectorAll('.workout');
+    currentWorkouts.forEach(el => (el.style.display = 'none'));
+    newOrder.forEach(el => this._renderWorkoutOnList(el));
+  }
+  _sortBy() {
+    if (sortBy.value === 'distance') this._sortByData('distance');
+    if (sortBy.value === 'duration') this._sortByData('duration');
+    if (sortBy.value === 'date') this._sortByDate();
   }
   reset() {
     //the only public method

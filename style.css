@@ -75,6 +75,7 @@ a:visited {
   align-self: flex-end;
   font-weight: bolder;
   margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
   padding: 0.5rem 0.75rem;
 }
 
@@ -275,4 +276,29 @@ li:hover .workout__delete{
 }
 .cycling-popup .leaflet-popup-content-wrapper {
   border-left: 5px solid var(--color-brand--1);
+}
+.sort-by {
+  width: auto;
+  margin-bottom: 0.5rem;
+  padding: 0.275rem 0.75rem;
+  font-family: inherit;
+  font-weight: bolder;
+  align-self: flex-end;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color-light--2);
+  transition: all 0.2s;
+}
+.sort-by:hover {
+  outline: none;
+  background-color: var(--color-dark--2);
+  color: var(--color-light--3);
+}
+.sort-by:focus {
+  border: none;
+  outline: none;
+}
+.btnContainer{
+  display: inline-flex;
+  align-self: flex-end;
 }
