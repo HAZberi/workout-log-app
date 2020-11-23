@@ -12,9 +12,9 @@ const deleteAll = document.querySelector('.workouts__deleteAll');
 const sortBy = document.querySelector('.sort-by');
 
 class Workout {
-  date = new Date();
   id = (Date.now() + '').slice(-7);
-  constructor(coords, distance, duration) {
+  constructor(date, coords, distance, duration) {
+    this.date = new Date(date); //date
     this.coords = coords; // [lat, lng]
     this.distance = distance; //km
     this.duration = duration; //min
@@ -22,7 +22,6 @@ class Workout {
   description() {
     // prettier-ignore
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
     return `${this.type[0].toUpperCase()}${this.type.slice(1)} on 
     ${
       months[this.date.getMonth()]
@@ -32,8 +31,8 @@ class Workout {
 
 class Running extends Workout {
   type = 'running';
-  constructor(coords, distance, duration, cadence) {
-    super(coords, distance, duration);
+  constructor(date, coords, distance, duration, cadence) {
+    super(date, coords, distance, duration);
     this.cadence = cadence;
     this.calcPace();
     this.description = this.description();
@@ -46,8 +45,8 @@ class Running extends Workout {
 
 class Cycling extends Workout {
   type = 'cycling';
-  constructor(coords, distance, duration, elevationGain) {
-    super(coords, distance, duration);
+  constructor(date, coords, distance, duration, elevationGain) {
+    super(date, coords, distance, duration);
     this.elevationGain = elevationGain;
     this.description = this.description();
     this.calcSpeed();
@@ -63,6 +62,7 @@ class App {
   #marker;
   #workouts = [];
   #zoomLevel = 13;
+  #workoutDate = "";
 
   constructor() {
     //object initialization through class App methods
@@ -98,7 +98,6 @@ class App {
     const { latitude } = pos.coords;
     const { longitude } = pos.coords;
     const coords = [latitude, longitude];
-    console.log(`https://www.google.ca/maps/@${latitude},${longitude}`);
     //adding Leaflet
 
     //map and marker object intialization
@@ -142,6 +141,7 @@ class App {
     let workout;
     const { lat: latitude, lng: longitude } = this.#marker.getLatLng();
     const coords = [latitude, longitude];
+    const date = this._checkExistingWorkoutDate();
 
     const inputValidations = function (...inputs) {
       //using rest parameters
@@ -162,7 +162,7 @@ class App {
         return alert(`Postive Numbers Only \n \n   OR   \n \nMissing Value`); //guard clause
 
       //create a running object
-      workout = new Running(coords, distance, duration, cadence);
+      workout = new Running(date, coords, distance, duration, cadence);
     }
     //if workout is cycling, create a cycling object
     if (type === 'cycling') {
@@ -172,7 +172,7 @@ class App {
         return alert(`Postive Numbers Only \n \n   OR   \n \nMissing Value`); //guard clause
 
       //create a cycling object
-      workout = new Cycling(coords, distance, duration, elevation);
+      workout = new Cycling(date, coords, distance, duration, elevation);
     }
 
     //add the new object to workout array
@@ -212,9 +212,9 @@ class App {
   _renderWorkoutOnList(workout) {
     let html = `
     <li class="workout workout--${workout.type}" data-id="${workout.id}">
-        <span class="workout__delete"><i class="far fa-trash-alt"></i></span>
       <h2 class="workout__title">${workout.description}</h2>
-      <button class="workout__edit"><i class="fas fa-edit"></i></button>
+      <span class="workout__edit "><i class="fas fa-edit"></i></span>
+      <span class="workout__delete "><i class="far fa-trash-alt"></i></span>
       <div class="workout__details">
         <span class="workout__icon">${
           workout.type === 'running' ? '🏃‍♂️' : '🚴‍'
@@ -233,7 +233,7 @@ class App {
         `
         <div class="workout__details">
         <span class="workout__icon">⚡️</span>
-        <span class="workout__value">${workout.pace.toFixed(1)}</span>
+        <span class="workout__value">${workout.pace?.toFixed(1)}</span>
         <span class="workout__unit">min/km</span>
       </div>
       <div class="workout__details">
@@ -317,16 +317,25 @@ class App {
     }
     inputDistance.focus();
   }
-  _editWorkout(e) {
+  _checkExistingWorkoutDate = function(){
+    let date = new Date();
+    if(this.#workoutDate){
+      date = this.#workoutDate;
+      this.#workoutDate = '';
+    }
+    return new Date(date);
+  }
+  _editWorkout(e) { 
     if (!e.target.closest('.workout__edit')) return;
     const workout = e.target.closest('.workout');
-    workout.style.display = 'none';
-    form.classList.remove('hidden');
-    setTimeout(() => (form.style.display = 'grid'), 1000);
     const workoutId = workout.dataset.id;
     const workoutToEdit = this.#workouts.find(
       workout => workout.id === workoutId
     );
+    this.#workoutDate = workoutToEdit.date;
+    workout.style.display = 'none';
+    form.classList.remove('hidden');
+    setTimeout(() => (form.style.display = 'grid'), 1000);
     this._populateForm(workoutToEdit);
     this.#workouts.splice(this.#workouts.indexOf(workoutToEdit), 1);
   }
@@ -361,8 +370,10 @@ class App {
   _checkExistingWorkouts() {
     if (this.#workouts.length < 1) {
       deleteAll.style.display = 'none';
+      sortBy.style.display = 'none';
     } else {
       deleteAll.style.display = 'flex';
+      sortBy.style.display = 'flex';
     }
   }
   _sortByData(data) {
@@ -392,3 +403,4 @@ class App {
   }
 }
 const app = new App();
+
