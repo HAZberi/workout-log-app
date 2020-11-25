@@ -213,8 +213,8 @@ class App {
     let html = `
     <li class="workout workout--${workout.type}" data-id="${workout.id}">
       <h2 class="workout__title">${workout.description}</h2>
-      <span class="workout__edit "><i class="fas fa-edit"></i></span>
-      <span class="workout__delete "><i class="far fa-trash-alt"></i></span>
+      <span class="workout__edit tooltip"><span class='tooltiptext'>Edit</span><i class="fas fa-edit"></i></span>
+      <span class="workout__delete tooltip"><span class='tooltiptext'>Delete</span><i class="far fa-trash-alt"></i></span>
       <div class="workout__details">
         <span class="workout__icon">${
           workout.type === 'running' ? '🏃‍♂️' : '🚴‍'
