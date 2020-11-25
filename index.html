@@ -19,14 +19,23 @@
       integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
       crossorigin="">
     </script>
+    <script defer src="https://kit.fontawesome.com/587543eaa2.js" crossorigin="anonymous"></script>
 
     <script defer src="script.js"></script>
-    <title>mapty // Map your workouts</title>
+    <title>Map your workouts</title>
   </head>
   <body>
     <div class="sidebar">
       <img src="logo.png" alt="Logo" class="logo" />
-
+      <div class="btnContainer">
+        <button class="workouts__deleteAll">Delete All</button>
+        <select class="sort-by" >
+          <option value="" selected disabled hidden>Sort By</option>
+          <option value="distance">Distance</option>
+          <option value="duration">Duration</option>
+          <option value="date">Date</option>
+        </select>
+      </div>
       <ul class="workouts">
         <form class="form hidden">
           <div class="form__row">
@@ -113,7 +122,7 @@
         </li> -->
       </ul>
 
-      <p class="copyright">
+      <!-- <p class="copyright">
         &copy; Copyright by
         <a
           class="twitter-link"
@@ -122,7 +131,7 @@
           >Jonas Schmedtmann</a
         >. Use for learning or your portfolio. Don't use to teach. Don't claim
         as your own.
-      </p>
+      </p> -->
     </div>
 
     <div id="map"></div>
