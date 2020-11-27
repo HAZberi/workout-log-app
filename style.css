@@ -78,7 +78,7 @@ a:visited {
   padding: 0.5rem 0.75rem;
 }
 
-.workouts__deleteAll:hover{
+.workouts__deleteAll:hover {
   background-color: var(--color-dark--2);
   color: var(--color-light--3);
 }
@@ -90,12 +90,14 @@ a:visited {
 .workout {
   background-color: var(--color-dark--2);
   border-radius: 5px;
-  margin-bottom: 1.5rem;
-  padding-right: 1.5rem;
-  padding-left: 1.5rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 0.75rem 1.5rem;
+  /* margin-bottom: 1.5rem; */
+  /* padding-right: 1.5rem; */
+  /* padding-left: 1.5rem; */
+  /* display: grid; */
+  /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+  /* gap: 0.75rem 1.5rem; */
+  height: 135px;
+  width: 500px;
 }
 .workout--running {
   border-left: 5px solid var(--color-brand--2);
@@ -107,8 +109,9 @@ a:visited {
 .workout__title {
   font-size: 1.65rem;
   font-weight: 600;
-  padding-top: 1.5rem;
+  /* padding-top: 1.5rem; */
   grid-area: 1 / 1 / 1 / 4;
+  padding-left: 3rem;
 }
 
 .workout__delete {
@@ -126,7 +129,7 @@ a:visited {
 .workout__delete:focus {
   outline: none;
 }
-.workout__delete:hover{
+.workout__delete:hover {
   background-color: transparent;
   color: var(--color-light--3);
 }
@@ -146,12 +149,12 @@ a:visited {
 .workout__edit:focus {
   outline: none;
 }
-.workout__edit:hover{
+.workout__edit:hover {
   background-color: transparent;
   color: var(--color-light--3);
 }
 .workout__details {
-  padding-bottom: 1.5rem;
+  /* padding-bottom: 1.5rem; */
   display: flex;
   align-items: baseline;
 }
@@ -301,10 +304,10 @@ a:visited {
   border: none;
   outline: none;
 }
-.btnContainer{
+.btnContainer {
   display: inline-flex;
   align-self: flex-end;
-  margin-bottom: 1.0rem;
+  margin-bottom: 1rem;
 }
 .tooltip {
   position: relative;
@@ -337,4 +340,21 @@ a:visited {
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+.inner_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 1rem 0rem 1rem;
+}
+.inner_bottom {
+  display: flex;
+  padding: 2.5rem 1rem 0rem 0rem;
+  justify-content: space-evenly;
+}
+.action_icon {
+  display: flex;
+  width: 80px;
+  justify-content: space-between;
+  margin-right: 3.5rem;
 }
