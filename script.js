@@ -10,6 +10,7 @@ const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
 const deleteAll = document.querySelector('.workouts__deleteAll');
 const sortBy = document.querySelector('.sort-by');
+const instructions = document.querySelector('.instructions');
 
 class Workout {
   id = (Date.now() + '').slice(-7);
@@ -62,7 +63,7 @@ class App {
   #marker;
   #workouts = [];
   #zoomLevel = 13;
-  #workoutDate = "";
+  #workoutDate = '';
 
   constructor() {
     //object initialization through class App methods
@@ -89,7 +90,9 @@ class App {
     navigator.geolocation.getCurrentPosition(
       this._loadMap.bind(this),
       function () {
-        alert(`Location Not Enabled OR Found`);
+        alert(
+          `Location Not Enabled OR Found. Please refresh the page and ALLOW location to start using the app. Thank You`
+        );
       }
     );
   }
@@ -125,6 +128,7 @@ class App {
     if (!this.#marker.isPopupOpen()) this.#marker.remove();
     this.#marker = L.marker([latitude, longitude]).addTo(this.#map);
     //show the form
+    instructions.classList.add('hide__instructions');
     form.classList.remove('hidden');
     inputType.focus();
   }
@@ -317,15 +321,15 @@ class App {
     }
     inputDistance.focus();
   }
-  _checkExistingWorkoutDate = function(){
+  _checkExistingWorkoutDate = function () {
     let date = new Date();
-    if(this.#workoutDate){
+    if (this.#workoutDate) {
       date = this.#workoutDate;
       this.#workoutDate = '';
     }
     return new Date(date);
-  }
-  _editWorkout(e) { 
+  };
+  _editWorkout(e) {
     if (!e.target.closest('.workout__edit')) return;
     const workout = e.target.closest('.workout');
     const workoutId = workout.dataset.id;
@@ -403,4 +407,3 @@ class App {
   }
 }
 const app = new App();
-
