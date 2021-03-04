@@ -127,8 +127,9 @@ class App {
     //if current marker is not attached to a workout, remove it -- else update current marker
     if (!this.#marker.isPopupOpen()) this.#marker.remove();
     this.#marker = L.marker([latitude, longitude]).addTo(this.#map);
-    //show the form
+    //hide the getting started instructions
     instructions.classList.add('hide__instructions');
+    //show the form
     form.classList.remove('hidden');
     inputType.focus();
   }
@@ -163,7 +164,9 @@ class App {
       const cadence = Number(inputCadence.value);
       //Check if the input is valid
       if (!inputValidations(distance, duration, cadence))
-        return alert(`Postive Numbers Only \n \n   OR   \n \nMissing Value`); //guard clause
+        return alert(
+          `Please enter a value. \n  Values MUST be a positive number.`
+        ); //guard clause
 
       //create a running object
       workout = new Running(date, coords, distance, duration, cadence);
@@ -173,7 +176,9 @@ class App {
       const elevation = Number(inputElevation.value);
       //Check if the input is valid
       if (!inputValidations(distance, duration) && isNaN(elevation))
-        return alert(`Postive Numbers Only \n \n   OR   \n \nMissing Value`); //guard clause
+        return alert(
+          `Please enter a value. \n  Values MUST be a positive number.`
+        ); //guard clause
 
       //create a cycling object
       workout = new Cycling(date, coords, distance, duration, elevation);
@@ -217,8 +222,8 @@ class App {
     let html = `
     <li class="workout workout--${workout.type}" data-id="${workout.id}">
       <h2 class="workout__title">${workout.description}</h2>
-      <span class="workout__edit tooltip"><span class='tooltiptext'>Edit</span><i class="fas fa-edit"></i></span>
-      <span class="workout__delete tooltip"><span class='tooltiptext'>Delete</span><i class="far fa-trash-alt"></i></span>
+      <span class="workout__edit"><i class="fas fa-edit"></i></span>
+      <span class="workout__delete"><i class="far fa-trash-alt"></i></span>
       <div class="workout__details">
         <span class="workout__icon">${
           workout.type === 'running' ? '🏃‍♂️' : '🚴‍'
@@ -339,6 +344,8 @@ class App {
     this.#workoutDate = workoutToEdit.date;
     workout.style.display = 'none';
     form.classList.remove('hidden');
+    //hide the getting started instructions
+    instructions.classList.add('hide__instructions');
     setTimeout(() => (form.style.display = 'grid'), 1000);
     this._populateForm(workoutToEdit);
     this.#workouts.splice(this.#workouts.indexOf(workoutToEdit), 1);
