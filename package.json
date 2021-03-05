@@ -1,0 +1,50 @@
+{
+  "name": "workout-logger",
+  "version": "1.0.0",
+  "description": "Log your cycling and running workouts anywhere in the world with Workout Logger",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel serve index.html",
+    "build": "parcel build index.html"
+  },
+  "staticFiles": {
+    "staticPath": "assets",
+    "watcherGlob": "**"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HAZberi/workout-log-app.git"
+  },
+  "keywords": [
+    "logger",
+    "workout",
+    "running",
+    "cycling",
+    "javascript",
+    "es6",
+    "classes",
+    "DOM",
+    "leaflet",
+    "mapping"
+  ],
+  "author": "Hassaan Zuberi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HAZberi/workout-log-app/issues"
+  },
+  "homepage": "https://github.com/HAZberi/workout-log-app#readme",
+  "devDependencies": {
+    "@parcel/optimizer-cssnano": "^2.0.0-nightly.617",
+    "@parcel/optimizer-htmlnano": "^2.0.0-nightly.617",
+    "@parcel/packager-css": "^2.0.0-nightly.617",
+    "@parcel/packager-html": "^2.0.0-nightly.617",
+    "@parcel/transformer-css": "^2.0.0-nightly.617",
+    "@parcel/transformer-html": "^2.0.0-nightly.617",
+    "@parcel/transformer-postcss": "^2.0.0-nightly.617",
+    "@parcel/transformer-posthtml": "^2.0.0-nightly.617",
+    "parcel": "^2.0.0-nightly.615",
+    "parcel-plugin-static-files-copy": "^2.5.1",
+    "postcss": "^8.2.7"
+  },
+  "dependencies": {}
+}

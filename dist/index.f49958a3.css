@@ -1,0 +1,367 @@
+:root {
+  --color-brand--1: #ffb545;
+  --color-brand--2: #00c46a;
+
+  --color-dark--1: #2d3439;
+  --color-dark--2: #42484d;
+  --color-light--1: #aaa;
+  --color-light--2: #ececec;
+  --color-light--3: rgb(214, 222, 224);
+  --color-light--4: #e5e5e5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+  color: var(--color-light--2);
+  font-weight: 400;
+  line-height: 1.6;
+  height: 100vh;
+  overscroll-behavior-y: none;
+
+  background-color: #fff;
+  padding: 2.5rem;
+
+  display: flex;
+}
+
+/* GENERAL */
+a:link,
+a:visited {
+  color: var(--color-brand--1);
+}
+
+/* SIDEBAR */
+.sidebar {
+  flex-basis: 50rem;
+  background-color: var(--color-light--4);
+  padding: 3rem 5rem 4rem 5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  height: 5.2rem;
+  align-self: center;
+  margin-bottom: 4rem;
+}
+
+.workouts {
+  list-style: none;
+  height: 77vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.workouts::-webkit-scrollbar {
+  width: 0;
+}
+
+.workouts__deleteAll {
+  border-radius: 5px;
+  border: hidden;
+  color: var(--color-dark--1);
+  background-color: var(--color-light--1);
+  cursor: pointer;
+  align-self: flex-end;
+  font-weight: bolder;
+  margin-right: 0.5rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.workouts__deleteAll:hover {
+  background-color: var(--color-dark--2);
+  color: var(--color-light--3);
+}
+
+.workouts__deleteAll:focus {
+  outline: none;
+}
+
+.workout {
+  background-color: var(--color-dark--2);
+  border-radius: 5px;
+  margin-bottom: 1.5rem;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0.75rem 1.5rem;
+  cursor: pointer;
+}
+.workout--running {
+  border-left: 5px solid var(--color-brand--2);
+}
+.workout--cycling {
+  border-left: 5px solid var(--color-brand--1);
+}
+
+.workout__title {
+  font-size: 1.65rem;
+  font-weight: 600;
+  padding-top: 1.5rem;
+  grid-area: 1 / 1 / 1 / 4;
+}
+
+.workout__delete {
+  border: hidden;
+  color: var(--color-light--1);
+  background-color: transparent;
+  cursor: pointer;
+  font-size: large;
+  align-self: end;
+  justify-self: end;
+  font-weight: bolder;
+  margin-bottom: 0.25rem;
+  grid-area: 1 / 4 / 1 / 4;
+}
+.workout__delete:focus {
+  outline: none;
+}
+.workout__delete:hover {
+  background-color: transparent;
+  color: var(--color-light--3);
+}
+
+.workout__edit {
+  border: hidden;
+  color: var(--color-light--1);
+  background-color: transparent;
+  cursor: pointer;
+  font-size: large;
+  align-self: end;
+  justify-self: center;
+  font-weight: bolder;
+  margin-bottom: 0.25rem;
+  grid-area: 1 / 4 / 1 / 4;
+}
+.workout__edit:focus {
+  outline: none;
+}
+.workout__edit:hover {
+  background-color: transparent;
+  color: var(--color-light--3);
+}
+.workout__details {
+  padding-bottom: 1.5rem;
+  display: flex;
+  align-items: baseline;
+}
+
+.workout__icon {
+  font-size: 1.75rem;
+  margin-right: 0.2rem;
+  height: 0.28rem;
+}
+
+.workout__value {
+  font-size: 1.45rem;
+  margin-right: 0.5rem;
+}
+
+.workout__unit {
+  font-size: 1.1rem;
+  color: var(--color-light--1);
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.form {
+  background-color: var(--color-dark--2);
+  border-radius: 5px;
+  padding: 1.5rem 2.75rem;
+  margin-bottom: 1.75rem;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 2.5rem;
+
+  /* Match height and activity boxes */
+  height: 9.25rem;
+  transition: all 0.5s, transform 1ms;
+}
+
+.form.hidden {
+  transform: translateY(-30rem);
+  height: 0;
+  padding: 0 2.25rem;
+  margin-bottom: 0;
+  opacity: 0;
+}
+
+.form__row {
+  display: flex;
+  align-items: center;
+}
+
+.form__row--hidden {
+  display: none;
+}
+
+.form__label {
+  flex: 0 0 50%;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.form__input {
+  width: 100%;
+  padding: 0.3rem 1.1rem;
+  font-family: inherit;
+  font-size: 1.4rem;
+  border: none;
+  border-radius: 3px;
+  background-color: var(--color-light--3);
+  transition: all 0.2s;
+}
+
+.form__input:focus {
+  outline: none;
+  background-color: #fff;
+}
+
+.form__btn {
+  display: none;
+}
+
+.copyright {
+  margin-top: auto;
+  font-size: 1.3rem;
+  text-align: center;
+  color: var(--color-light--1);
+}
+
+.twitter-link:link,
+.twitter-link:visited {
+  color: var(--color-light--1);
+  transition: all 0.2s;
+}
+
+.twitter-link:hover,
+.twitter-link:active {
+  color: var(--color-light--2);
+}
+
+/* MAP */
+#map {
+  flex: 1;
+  height: 100%;
+  background-color: var(--color-light--1);
+}
+
+/* Popup width is defined in JS using options */
+.leaflet-popup .leaflet-popup-content-wrapper {
+  background-color: var(--color-dark--1);
+  color: var(--color-light--2);
+  border-radius: 5px;
+  padding-right: 0.6rem;
+}
+
+.leaflet-popup .leaflet-popup-content {
+  font-size: 1.25rem;
+  font-weight: 100;
+}
+
+.leaflet-popup .leaflet-popup-tip {
+  background-color: var(--color-dark--1);
+}
+
+.running-popup .leaflet-popup-content-wrapper {
+  border-left: 5px solid var(--color-brand--2);
+}
+.cycling-popup .leaflet-popup-content-wrapper {
+  border-left: 5px solid var(--color-brand--1);
+}
+.sort-by {
+  width: auto;
+  padding: 0.275rem 0.75rem;
+  font-family: inherit;
+  font-weight: bolder;
+  align-self: flex-end;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: var(--color-light--1);
+  transition: all 0.2s;
+}
+.sort-by:hover {
+  outline: none;
+  background-color: var(--color-dark--2);
+  color: var(--color-light--3);
+}
+.sort-by:focus {
+  border: none;
+  outline: none;
+}
+.btnContainer {
+  display: inline-flex;
+  align-self: flex-end;
+  margin-bottom: 1rem;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  font-size: small;
+  font-weight: lighter;
+  width: auto;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 0 7px;
+  border-radius: 5px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 9999;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -6px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+.gettingStarted__list {
+  list-style: circle;
+  list-style-position: inside;
+  font-size: small;
+  font-weight: bold;
+}
+
+.gettingStarted__list li {
+  display: list-item;
+}
+
+.hide__instructions {
+  display: none;
+}
+.instructions {
+  margin-bottom: 1em;
+  color: var(--color-dark--1);
+}
+
+.gettingStarted__list li a {
+  color: var(--color-dark--1);
+}
+
+/*# sourceMappingURL=index.f49958a3.css.map */
