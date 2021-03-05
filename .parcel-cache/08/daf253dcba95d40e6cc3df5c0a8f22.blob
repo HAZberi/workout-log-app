@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="shortcut icon" href="/icon.5eda2d1c.png">
+    <link rel="shortcut icon" href="/icon.HASH_REF_0bb0e23cbf404d2c90bfc0c25eda2d1c.png">
 
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="/index.f49958a3.css">
+    <link rel="stylesheet" href="/index.HASH_REF_d0deca87eede5c046eb7b63af49958a3.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="">
     <script defer="" src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin="">// modules are defined as an array
 // [ module function, map of requires ]
@@ -480,13 +480,13 @@ function hmrAcceptRun(bundle, id) {
 </script>
     <script defer="" src="https://kit.fontawesome.com/587543eaa2.js" crossorigin="anonymous"></script>
 
-    <script defer="" src="/index.56f57d74.js"></script>
+    <script defer="" src="/index.HASH_REF_d3e299c25db6b55a2dc16a8456f57d74.js"></script>
     <title>Map your Workouts</title>
   </head>
   <body>
     <div id="map"></div>
     <div class="sidebar">
-      <img src="/logo.f74eab89.png" alt="Logo" class="logo">
+      <img src="/logo.HASH_REF_94ba6b36f9ba551e90f1ccdcf74eab89.png" alt="Logo" class="logo">
       <div class="btnContainer">
         <button class="workouts__deleteAll">Delete All</button>
         <select class="sort-by">
