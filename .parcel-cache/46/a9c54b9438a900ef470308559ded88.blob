@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="eb0722f033c0414f659cddc67d824ce1">
+
+    <link href="3a2777556f4424231bc3ce6a50826a10" rel="stylesheet">
+
+    <link rel="stylesheet" href="963b077adce81b309e68cc8ad4163d77">
+    <link rel="stylesheet" href="71378344b1c811deb8e251ab7857ff68" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="">
+    <script defer="" src="893fa562a5b688a8e25dd5fb2d63ba0a" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin="" data-parcel-key="7791c1943342c0e779b9533cb9488c27">
+    </script>
+    <script defer="" src="6dce03378cca96fa9483050a3c687035" crossorigin="anonymous"></script>
+
+    <script defer="" type="module" src="dce3960b45bbf8ea6da69d67d363493c"></script>
+    <title>Map your Workouts</title>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div class="sidebar">
+      <img src="ccd5a75c13607a5c8e337a0ed30c7252" alt="Logo" class="logo">
+      <div class="btnContainer">
+        <button class="workouts__deleteAll">Delete All</button>
+        <select class="sort-by">
+          <option value="" selected="" disabled="" hidden="">Sort By</option>
+          <option value="distance">Distance</option>
+          <option value="duration">Duration</option>
+          <option value="date">Date</option>
+        </select>
+      </div>
+      <ul class="workouts">
+        <div class="instructions">
+          <h1>Getting Started!</h1>
+          <ul class="gettingStarted__list">
+            <li>Allow location once the page loads. Only then you will be able to see the map and use the application.</li>
+            <li>Click on the map to start adding workouts.</li>
+            <li>Enter your workout infromation then press ENTER.</li>
+            <li>You have succesfully created a workout.</li>
+            <li>Click the workout list item you've just created to center the workout marker on the map.</li>
+            <li>For more details visit 
+              <a href="7f194a640c3e3ae464393b1d375ed973" target="_blank">Github Documentation</a>.
+            </li>
+          </ul>
+        </div>
+        <form class="form hidden">
+          <div class="form__row">
+            <label class="form__label">Type</label>
+            <select class="form__input form__input--type">
+              <option value="running">Running</option>
+              <option value="cycling">Cycling</option>
+            </select>
+          </div>
+          <div class="form__row">
+            <label class="form__label">Distance</label>
+            <input class="form__input form__input--distance" placeholder="km">
+          </div>
+          <div class="form__row">
+            <label class="form__label">Duration</label>
+            <input class="form__input form__input--duration" placeholder="min">
+          </div>
+          <div class="form__row">
+            <label class="form__label">Cadence</label>
+            <input class="form__input form__input--cadence" placeholder="step/min">
+          </div>
+          <div class="form__row form__row--hidden">
+            <label class="form__label">Elev Gain</label>
+            <input class="form__input form__input--elevation" placeholder="meters">
+          </div>
+          <button class="form__btn">OK</button>
+        </form>
+      </ul>
+    </div>
+  </body>
+</html>

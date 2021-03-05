@@ -462,422 +462,718 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"7qT7c":[function(require,module,exports) {
-'use strict';
-
-//Select all Relevant HTML Elements
-const form = document.querySelector('.form');
-const containerWorkouts = document.querySelector('.workouts');
-const inputType = document.querySelector('.form__input--type');
-const inputDistance = document.querySelector('.form__input--distance');
-const inputDuration = document.querySelector('.form__input--duration');
-const inputCadence = document.querySelector('.form__input--cadence');
-const inputElevation = document.querySelector('.form__input--elevation');
-const deleteAll = document.querySelector('.workouts__deleteAll');
-const sortBy = document.querySelector('.sort-by');
-const instructions = document.querySelector('.instructions');
-
-class Workout {
-  id = (Date.now() + '').slice(-7);
-  constructor(date, coords, distance, duration) {
-    this.date = new Date(date); //date
-    this.coords = coords; // [lat, lng]
-    this.distance = distance; //km
-    this.duration = duration; //min
-  }
-  description() {
-    // prettier-ignore
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    return `${this.type[0].toUpperCase()}${this.type.slice(1)} on 
-    ${
-      months[this.date.getMonth()]
-    } ${this.date.getDate()}, ${this.date.getFullYear()}`;
+"use strict";
+var _babelRuntimeHelpersClassPrivateFieldGet = require("@babel/runtime/helpers/classPrivateFieldGet");
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+var _babelRuntimeHelpersClassPrivateFieldGetDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersClassPrivateFieldGet);
+var _babelRuntimeHelpersClassPrivateFieldSet = require("@babel/runtime/helpers/classPrivateFieldSet");
+var _babelRuntimeHelpersClassPrivateFieldSetDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersClassPrivateFieldSet);
+var _babelRuntimeHelpersAssertThisInitialized = require("@babel/runtime/helpers/assertThisInitialized");
+var _babelRuntimeHelpersAssertThisInitializedDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersAssertThisInitialized);
+var _babelRuntimeHelpersInherits = require("@babel/runtime/helpers/inherits");
+var _babelRuntimeHelpersInheritsDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersInherits);
+var _babelRuntimeHelpersPossibleConstructorReturn = require("@babel/runtime/helpers/possibleConstructorReturn");
+var _babelRuntimeHelpersPossibleConstructorReturnDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersPossibleConstructorReturn);
+var _babelRuntimeHelpersGetPrototypeOf = require("@babel/runtime/helpers/getPrototypeOf");
+var _babelRuntimeHelpersGetPrototypeOfDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersGetPrototypeOf);
+var _babelRuntimeHelpersClassCallCheck = require("@babel/runtime/helpers/classCallCheck");
+var _babelRuntimeHelpersClassCallCheckDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersClassCallCheck);
+var _babelRuntimeHelpersCreateClass = require("@babel/runtime/helpers/createClass");
+var _babelRuntimeHelpersCreateClassDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersCreateClass);
+var _babelRuntimeHelpersDefineProperty = require("@babel/runtime/helpers/defineProperty");
+var _babelRuntimeHelpersDefinePropertyDefault = _parcelHelpers.interopDefault(_babelRuntimeHelpersDefineProperty);
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = _isNativeReflectConstruct();
+  return function _createSuperInternal() {
+    var Super = _babelRuntimeHelpersGetPrototypeOfDefault.default(Derived), result;
+    if (hasNativeReflectConstruct) {
+      var NewTarget = _babelRuntimeHelpersGetPrototypeOfDefault.default(this).constructor;
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+    return _babelRuntimeHelpersPossibleConstructorReturnDefault.default(this, result);
+  };
+}
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
   }
 }
-
-class Running extends Workout {
-  type = 'running';
-  constructor(date, coords, distance, duration, cadence) {
-    super(date, coords, distance, duration);
-    this.cadence = cadence;
-    this.calcPace();
-    this.description = this.description();
+// Select all Relevant HTML Elements
+var form = document.querySelector('.form');
+var containerWorkouts = document.querySelector('.workouts');
+var inputType = document.querySelector('.form__input--type');
+var inputDistance = document.querySelector('.form__input--distance');
+var inputDuration = document.querySelector('.form__input--duration');
+var inputCadence = document.querySelector('.form__input--cadence');
+var inputElevation = document.querySelector('.form__input--elevation');
+var deleteAll = document.querySelector('.workouts__deleteAll');
+var sortBy = document.querySelector('.sort-by');
+var instructions = document.querySelector('.instructions');
+var Workout = /*#__PURE__*/(function () {
+  function Workout(date, coords, distance, duration) {
+    _babelRuntimeHelpersClassCallCheckDefault.default(this, Workout);
+    _babelRuntimeHelpersDefinePropertyDefault.default(this, "id", (Date.now() + '').slice(-7));
+    this.date = new Date(date);
+    // date
+    this.coords = coords;
+    // [lat, lng]
+    this.distance = distance;
+    // km
+    this.duration = duration;
   }
-  calcPace() {
-    this.pace = this.duration / this.distance; //min/km
-    return this.pace;
+  _babelRuntimeHelpersCreateClassDefault.default(Workout, [{
+    key: "description",
+    value: function description() {
+      // prettier-ignore
+      var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      return ("").concat(this.type[0].toUpperCase()).concat(this.type.slice(1), " on \n    ").concat(months[this.date.getMonth()], " ").concat(this.date.getDate(), ", ").concat(this.date.getFullYear());
+    }
+  }]);
+  return Workout;
+})();
+var Running = /*#__PURE__*/(function (_Workout) {
+  _babelRuntimeHelpersInheritsDefault.default(Running, _Workout);
+  var _super = _createSuper(Running);
+  function Running(date, coords, distance, duration, cadence) {
+    var _this;
+    _babelRuntimeHelpersClassCallCheckDefault.default(this, Running);
+    _this = _super.call(this, date, coords, distance, duration);
+    _babelRuntimeHelpersDefinePropertyDefault.default(_babelRuntimeHelpersAssertThisInitializedDefault.default(_this), "type", 'running');
+    _this.cadence = cadence;
+    _this.calcPace();
+    _this.description = _this.description();
+    return _this;
   }
-}
-
-class Cycling extends Workout {
-  type = 'cycling';
-  constructor(date, coords, distance, duration, elevationGain) {
-    super(date, coords, distance, duration);
-    this.elevationGain = elevationGain;
-    this.description = this.description();
-    this.calcSpeed();
+  _babelRuntimeHelpersCreateClassDefault.default(Running, [{
+    key: "calcPace",
+    value: function calcPace() {
+      this.pace = this.duration / this.distance;
+      // min/km
+      return this.pace;
+    }
+  }]);
+  return Running;
+})(Workout);
+var Cycling = /*#__PURE__*/(function (_Workout2) {
+  _babelRuntimeHelpersInheritsDefault.default(Cycling, _Workout2);
+  var _super2 = _createSuper(Cycling);
+  function Cycling(date, coords, distance, duration, elevationGain) {
+    var _this2;
+    _babelRuntimeHelpersClassCallCheckDefault.default(this, Cycling);
+    _this2 = _super2.call(this, date, coords, distance, duration);
+    _babelRuntimeHelpersDefinePropertyDefault.default(_babelRuntimeHelpersAssertThisInitializedDefault.default(_this2), "type", 'cycling');
+    _this2.elevationGain = elevationGain;
+    _this2.description = _this2.description();
+    _this2.calcSpeed();
+    return _this2;
   }
-  calcSpeed() {
-    this.speed = this.distance / (this.duration / 60); //km/h
-    return this.speed;
-  }
-}
-
-class App {
-  #map;
-  #marker;
-  #workouts = [];
-  #zoomLevel = 13;
-  #workoutDate = '';
-
-  constructor() {
-    //object initialization through class App methods
+  _babelRuntimeHelpersCreateClassDefault.default(Cycling, [{
+    key: "calcSpeed",
+    value: function calcSpeed() {
+      this.speed = this.distance / (this.duration / 60);
+      // km/h
+      return this.speed;
+    }
+  }]);
+  return Cycling;
+})(Workout);
+var _map = new WeakMap();
+var _marker = new WeakMap();
+var _workouts = new WeakMap();
+var _zoomLevel = new WeakMap();
+var _workoutDate = new WeakMap();
+var App = /*#__PURE__*/(function () {
+  function App() {
+    _babelRuntimeHelpersClassCallCheckDefault.default(this, App);
+    _map.set(this, {
+      writable: true,
+      value: void 0
+    });
+    _marker.set(this, {
+      writable: true,
+      value: void 0
+    });
+    _workouts.set(this, {
+      writable: true,
+      value: []
+    });
+    _zoomLevel.set(this, {
+      writable: true,
+      value: 13
+    });
+    _workoutDate.set(this, {
+      writable: true,
+      value: ''
+    });
+    _babelRuntimeHelpersDefinePropertyDefault.default(this, "_checkExistingWorkoutDate", function () {
+      var date = new Date();
+      if (_babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workoutDate)) {
+        date = _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workoutDate);
+        _babelRuntimeHelpersClassPrivateFieldSetDefault.default(this, _workoutDate, '');
+      }
+      return new Date(date);
+    });
+    // object initialization through class App methods
     this._getPosition();
     this._getLocalStorage();
     this._checkExistingWorkouts();
-    //All event listners
+    // All event listners
     form.addEventListener('submit', this._newWorkout.bind(this));
     inputType.addEventListener('change', this._toggleElevationField);
-    containerWorkouts.addEventListener(
-      'click',
-      function (e) {
-        this._moveToPopUp(e);
-        this._deleteWorkout(e);
-        this._editWorkout(e);
-      }.bind(this)
-    );
+    containerWorkouts.addEventListener('click', (function (e) {
+      this._moveToPopUp(e);
+      this._deleteWorkout(e);
+      this._editWorkout(e);
+    }).bind(this));
     deleteAll.addEventListener('click', this._deleteAllWorkouts.bind(this));
     sortBy.addEventListener('change', this._sortBy.bind(this));
-    //Note: binding this keyword to callback is important when working with classes
   }
-
-  _getPosition() {
-    navigator.geolocation.getCurrentPosition(
-      this._loadMap.bind(this),
-      function () {
-        alert(
-          `Location Not Enabled OR Found. Please refresh the page and ALLOW location to start using the app. Thank You`
-        );
+  _babelRuntimeHelpersCreateClassDefault.default(App, [{
+    key: "_getPosition",
+    value: function _getPosition() {
+      navigator.geolocation.getCurrentPosition(this._loadMap.bind(this), function () {
+        alert("Location Not Enabled OR Found. Please refresh the page and ALLOW location to start using the app. Thank You");
+      });
+    }
+  }, {
+    key: "_loadMap",
+    value: function _loadMap(pos) {
+      // callback function
+      var latitude = pos.coords.latitude;
+      var longitude = pos.coords.longitude;
+      var coords = [latitude, longitude];
+      // adding Leaflet
+      // map and marker object intialization
+      _babelRuntimeHelpersClassPrivateFieldSetDefault.default(this, _map, L.map('map').setView(coords, _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _zoomLevel)));
+      _babelRuntimeHelpersClassPrivateFieldSetDefault.default(this, _marker, L.marker(coords));
+      // adding tile layer
+      L.tileLayer('http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(_babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _map));
+      // display map markers from the storage
+      this._displayLocalStorageMapMarkers();
+      // setting the map view and zoom level based on current location
+      _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _map).setView(coords, _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _zoomLevel), {
+        animate: false
+      });
+      // listen to any click event on the map and display the workout form
+      _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _map).on('click', this._showForm.bind(this));
+    }
+  }, {
+    key: "_showForm",
+    value: function _showForm(e) {
+      // callback function
+      // getting lat lng of where user clicked
+      var _e$latlng = e.latlng, latitude = _e$latlng.lat, longitude = _e$latlng.lng;
+      // if current marker is not attached to a workout, remove it -- else update current marker
+      if (!_babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _marker).isPopupOpen()) _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _marker).remove();
+      _babelRuntimeHelpersClassPrivateFieldSetDefault.default(this, _marker, L.marker([latitude, longitude]).addTo(_babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _map)));
+      // hide the getting started instructions
+      instructions.classList.add('hide__instructions');
+      // show the form
+      form.classList.remove('hidden');
+      inputType.focus();
+    }
+  }, {
+    key: "_toggleElevationField",
+    value: function _toggleElevationField() {
+      // callback function
+      // to toggle between cadence and elevation fields
+      inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
+      inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
+    }
+  }, {
+    key: "_newWorkout",
+    value: function _newWorkout(e) {
+      e.preventDefault();
+      var workout;
+      var _classPrivateFieldGet2 = _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _marker).getLatLng(), latitude = _classPrivateFieldGet2.lat, longitude = _classPrivateFieldGet2.lng;
+      var coords = [latitude, longitude];
+      var date = this._checkExistingWorkoutDate();
+      var inputValidations = function inputValidations() {
+        for (var _len = arguments.length, inputs = new Array(_len), _key = 0; _key < _len; _key++) {
+          inputs[_key] = arguments[_key];
+        }
+        // using rest parameters
+        var validIntegers = inputs.every(function (input) {
+          return Number.isFinite(input);
+        });
+        var positiveIntegers = inputs.every(function (input) {
+          return input > 0;
+        });
+        return validIntegers && positiveIntegers;
+      };
+      // Get data from the form
+      var type = inputType.value;
+      var distance = Number(inputDistance.value);
+      var duration = Number(inputDuration.value);
+      // if workout is running, create a running object
+      if (type === 'running') {
+        var cadence = Number(inputCadence.value);
+        // Check if the input is valid
+        if (!inputValidations(distance, duration, cadence)) return alert("Please enter a value. \n  Values MUST be a positive number.");
+        // guard clause
+        // create a running object
+        workout = new Running(date, coords, distance, duration, cadence);
       }
-    );
-  }
-  _loadMap(pos) {
-    //callback function
-    const { latitude } = pos.coords;
-    const { longitude } = pos.coords;
-    const coords = [latitude, longitude];
-    //adding Leaflet
-
-    //map and marker object intialization
-    this.#map = L.map('map').setView(coords, this.#zoomLevel);
-    this.#marker = L.marker(coords);
-    //adding tile layer
-    L.tileLayer('http://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png', {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(this.#map);
-    //display map markers from the storage
-    this._displayLocalStorageMapMarkers();
-    //setting the map view and zoom level based on current location
-    this.#map.setView(coords, this.#zoomLevel, {
-      animate: false,
-    });
-    //listen to any click event on the map and display the workout form
-    this.#map.on('click', this._showForm.bind(this));
-  }
-  _showForm(e) {
-    //callback function
-    //getting lat lng of where user clicked
-    const { lat: latitude, lng: longitude } = e.latlng;
-    //if current marker is not attached to a workout, remove it -- else update current marker
-    if (!this.#marker.isPopupOpen()) this.#marker.remove();
-    this.#marker = L.marker([latitude, longitude]).addTo(this.#map);
-    //hide the getting started instructions
-    instructions.classList.add('hide__instructions');
-    //show the form
-    form.classList.remove('hidden');
-    inputType.focus();
-  }
-  _toggleElevationField() {
-    //callback function
-    //to toggle between cadence and elevation fields
-    inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
-    inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
-  }
-
-  _newWorkout(e) {
-    e.preventDefault();
-
-    let workout;
-    const { lat: latitude, lng: longitude } = this.#marker.getLatLng();
-    const coords = [latitude, longitude];
-    const date = this._checkExistingWorkoutDate();
-
-    const inputValidations = function (...inputs) {
-      //using rest parameters
-      const validIntegers = inputs.every(input => Number.isFinite(input));
-      const positiveIntegers = inputs.every(input => input > 0);
-      return validIntegers && positiveIntegers;
-    };
-    //Get data from the form
-    const type = inputType.value;
-    const distance = Number(inputDistance.value);
-    const duration = Number(inputDuration.value);
-    //if workout is running, create a running object
-    if (type === 'running') {
-      const cadence = Number(inputCadence.value);
-      //Check if the input is valid
-      if (!inputValidations(distance, duration, cadence))
-        return alert(
-          `Please enter a value. \n  Values MUST be a positive number.`
-        ); //guard clause
-
-      //create a running object
-      workout = new Running(date, coords, distance, duration, cadence);
-    }
-    //if workout is cycling, create a cycling object
-    if (type === 'cycling') {
-      const elevation = Number(inputElevation.value);
-      //Check if the input is valid
-      if (!inputValidations(distance, duration) && isNaN(elevation))
-        return alert(
-          `Please enter a value. \n  Values MUST be a positive number.`
-        ); //guard clause
-
-      //create a cycling object
-      workout = new Cycling(date, coords, distance, duration, elevation);
-    }
-
-    //add the new object to workout array
-    this.#workouts.push(workout);
-
-    //Render workout on a map as a marker
-    this._renderWorkoutOnMap(workout);
-
-    //Render workout on the list
-    this._renderWorkoutOnList(workout);
-
-    //Check if there is need to display DeleteAll or Sort buttons
-    this._checkExistingWorkouts();
-
-    //Hide form and clear input fields
-    this._resetFields();
-
-    //save wokouts to local storage
-    this._setLocalStorage();
-  }
-  _renderWorkoutOnMap(workout) {
-    this.#marker
-      .bindPopup(
-        L.popup({
-          maxWidth: 250,
-          minWidth: 100,
-          autoClose: false,
-          closeOnClick: false,
-          closeButton: false,
-          className: `${workout.type}-popup`,
-        }).setContent(
-          `${workout.type === 'running' ? '🏃‍♂️' : '🚴‍'} ${workout.description}`
-        )
-      )
-      .openPopup();
-  }
-  _renderWorkoutOnList(workout) {
-    let html = `
-    <li class="workout workout--${workout.type}" data-id="${workout.id}">
-      <h2 class="workout__title">${workout.description}</h2>
-      <span class="workout__edit"><i class="fas fa-edit"></i></span>
-      <span class="workout__delete"><i class="far fa-trash-alt"></i></span>
-      <div class="workout__details">
-        <span class="workout__icon">${
-          workout.type === 'running' ? '🏃‍♂️' : '🚴‍'
-        }</span>
-        <span class="workout__value">${workout.distance}</span>
-        <span class="workout__unit">km</span>
-      </div>
-      <div class="workout__details">
-        <span class="workout__icon">⏱</span>
-        <span class="workout__value">${workout.duration}</span>
-        <span class="workout__unit">min</span>
-      </div>`;
-    if (workout.type === 'running') {
-      html =
-        html +
-        `
-        <div class="workout__details">
-        <span class="workout__icon">⚡️</span>
-        <span class="workout__value">${workout.pace?.toFixed(1)}</span>
-        <span class="workout__unit">min/km</span>
-      </div>
-      <div class="workout__details">
-        <span class="workout__icon">🦶🏼</span>
-        <span class="workout__value">${workout.cadence}</span>
-        <span class="workout__unit">spm</span>
-      </div>
-    </li>`;
-    }
-    if (workout.type === 'cycling') {
-      html =
-        html +
-        `
-        <div class="workout__details">
-        <span class="workout__icon">⚡️</span>
-        <span class="workout__value">${workout.speed?.toFixed(1)}</span>
-        <span class="workout__unit">km/h</span>
-      </div>
-      <div class="workout__details">
-        <span class="workout__icon">⛰</span>
-        <span class="workout__value">${workout.elevationGain}</span>
-        <span class="workout__unit">m</span>
-      </div>
-    </li>`;
-    }
-    form.insertAdjacentHTML('afterend', html);
-  }
-  _moveToPopUp(e) {
-    if (!e.target.closest('.workout')) return;
-    const workoutId = e.target.closest('.workout').dataset.id;
-    const workout = this.#workouts.find(workout => workout.id === workoutId);
-    this.#map.setView(workout.coords, this.#zoomLevel, {
-      animate: true,
-      duration: 1,
-    });
-  }
-  _resetFields() {
-    inputCadence.value = inputDistance.value = inputDuration.value = inputElevation.value =
-      '';
-    inputDistance.blur();
-    inputCadence.blur();
-    inputDuration.blur();
-    inputElevation.blur();
-    form.style.display = 'none';
-    form.classList.add('hidden');
-    setTimeout(() => (form.style.display = 'grid'), 1000);
-  }
-  _setLocalStorage() {
-    //stringify arrays and objects
-    localStorage.setItem('workouts', JSON.stringify(this.#workouts));
-
-    //this option for storage is not recommended
-    //all the inherited properties and methods will be lost
-    //Experiment by creating public methods eg: click()
-  }
-  _displayLocalStorageMapMarkers() {
-    //display and set workouts markers on the map, if any when the map loads for the first time
-    if (!this.#workouts.length > 1)
-      return console.log(`No workouts found in local storage`);
-    this.#workouts.forEach(workout => {
-      this.#marker = L.marker(workout.coords).addTo(this.#map);
+      // if workout is cycling, create a cycling object
+      if (type === 'cycling') {
+        var elevation = Number(inputElevation.value);
+        // Check if the input is valid
+        if (!inputValidations(distance, duration) && isNaN(elevation)) return alert("Please enter a value. \n  Values MUST be a positive number.");
+        // guard clause
+        // create a cycling object
+        workout = new Cycling(date, coords, distance, duration, elevation);
+      }
+      // add the new object to workout array
+      _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts).push(workout);
+      // Render workout on a map as a marker
       this._renderWorkoutOnMap(workout);
-    });
+      // Render workout on the list
+      this._renderWorkoutOnList(workout);
+      // Check if there is need to display DeleteAll or Sort buttons
+      this._checkExistingWorkouts();
+      // Hide form and clear input fields
+      this._resetFields();
+      // save wokouts to local storage
+      this._setLocalStorage();
+    }
+  }, {
+    key: "_renderWorkoutOnMap",
+    value: function _renderWorkoutOnMap(workout) {
+      _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _marker).bindPopup(L.popup({
+        maxWidth: 250,
+        minWidth: 100,
+        autoClose: false,
+        closeOnClick: false,
+        closeButton: false,
+        className: ("").concat(workout.type, "-popup")
+      }).setContent(("").concat(workout.type === 'running' ? '🏃‍♂️' : '🚴‍', " ").concat(workout.description))).openPopup();
+    }
+  }, {
+    key: "_renderWorkoutOnList",
+    value: function _renderWorkoutOnList(workout) {
+      var html = ("\n    <li class=\"workout workout--").concat(workout.type, "\" data-id=\"").concat(workout.id, "\">\n      <h2 class=\"workout__title\">").concat(workout.description, "</h2>\n      <span class=\"workout__edit\"><i class=\"fas fa-edit\"></i></span>\n      <span class=\"workout__delete\"><i class=\"far fa-trash-alt\"></i></span>\n      <div class=\"workout__details\">\n        <span class=\"workout__icon\">").concat(workout.type === 'running' ? '🏃‍♂️' : '🚴‍', "</span>\n        <span class=\"workout__value\">").concat(workout.distance, "</span>\n        <span class=\"workout__unit\">km</span>\n      </div>\n      <div class=\"workout__details\">\n        <span class=\"workout__icon\">⏱</span>\n        <span class=\"workout__value\">").concat(workout.duration, "</span>\n        <span class=\"workout__unit\">min</span>\n      </div>");
+      if (workout.type === 'running') {
+        var _workout$pace;
+        html = html + ("\n        <div class=\"workout__details\">\n        <span class=\"workout__icon\">⚡️</span>\n        <span class=\"workout__value\">").concat((_workout$pace = workout.pace) === null || _workout$pace === void 0 ? void 0 : _workout$pace.toFixed(1), "</span>\n        <span class=\"workout__unit\">min/km</span>\n      </div>\n      <div class=\"workout__details\">\n        <span class=\"workout__icon\">🦶🏼</span>\n        <span class=\"workout__value\">").concat(workout.cadence, "</span>\n        <span class=\"workout__unit\">spm</span>\n      </div>\n    </li>");
+      }
+      if (workout.type === 'cycling') {
+        var _workout$speed;
+        html = html + ("\n        <div class=\"workout__details\">\n        <span class=\"workout__icon\">⚡️</span>\n        <span class=\"workout__value\">").concat((_workout$speed = workout.speed) === null || _workout$speed === void 0 ? void 0 : _workout$speed.toFixed(1), "</span>\n        <span class=\"workout__unit\">km/h</span>\n      </div>\n      <div class=\"workout__details\">\n        <span class=\"workout__icon\">⛰</span>\n        <span class=\"workout__value\">").concat(workout.elevationGain, "</span>\n        <span class=\"workout__unit\">m</span>\n      </div>\n    </li>");
+      }
+      form.insertAdjacentHTML('afterend', html);
+    }
+  }, {
+    key: "_moveToPopUp",
+    value: function _moveToPopUp(e) {
+      if (!e.target.closest('.workout')) return;
+      var workoutId = e.target.closest('.workout').dataset.id;
+      var workout = _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts).find(function (workout) {
+        return workout.id === workoutId;
+      });
+      _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _map).setView(workout.coords, _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _zoomLevel), {
+        animate: true,
+        duration: 1
+      });
+    }
+  }, {
+    key: "_resetFields",
+    value: function _resetFields() {
+      inputCadence.value = inputDistance.value = inputDuration.value = inputElevation.value = '';
+      inputDistance.blur();
+      inputCadence.blur();
+      inputDuration.blur();
+      inputElevation.blur();
+      form.style.display = 'none';
+      form.classList.add('hidden');
+      setTimeout(function () {
+        return form.style.display = 'grid';
+      }, 1000);
+    }
+  }, {
+    key: "_setLocalStorage",
+    value: function _setLocalStorage() {
+      // stringify arrays and objects
+      localStorage.setItem('workouts', JSON.stringify(_babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts)));
+    }
+  }, {
+    key: "_displayLocalStorageMapMarkers",
+    value: function _displayLocalStorageMapMarkers() {
+      var _this3 = this;
+      // display and set workouts markers on the map, if any when the map loads for the first time
+      if (!_babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts).length > 1) return console.log("No workouts found in local storage");
+      _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts).forEach(function (workout) {
+        _babelRuntimeHelpersClassPrivateFieldSetDefault.default(_this3, _marker, L.marker(workout.coords).addTo(_babelRuntimeHelpersClassPrivateFieldGetDefault.default(_this3, _map)));
+        _this3._renderWorkoutOnMap(workout);
+      });
+    }
+  }, {
+    key: "_populateForm",
+    value: function _populateForm(workout) {
+      inputType.value = workout.type;
+      inputDistance.value = workout.distance;
+      inputDuration.value = workout.duration;
+      _babelRuntimeHelpersClassPrivateFieldSetDefault.default(this, _marker, L.marker(workout.coords).addTo(_babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _map)));
+      if (workout.type === 'running') {
+        inputCadence.value = workout.cadence;
+        inputCadence.closest('.form__row').classList.remove('form__row--hidden');
+        inputElevation.closest('.form__row').classList.add('form__row--hidden');
+      }
+      if (workout.type === 'cycling') {
+        inputElevation.value = workout.elevationGain;
+        inputElevation.closest('.form__row').classList.remove('form__row--hidden');
+        inputCadence.closest('.form__row').classList.add('form__row--hidden');
+      }
+      inputDistance.focus();
+    }
+  }, {
+    key: "_editWorkout",
+    value: function _editWorkout(e) {
+      if (!e.target.closest('.workout__edit')) return;
+      var workout = e.target.closest('.workout');
+      var workoutId = workout.dataset.id;
+      var workoutToEdit = _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts).find(function (workout) {
+        return workout.id === workoutId;
+      });
+      _babelRuntimeHelpersClassPrivateFieldSetDefault.default(this, _workoutDate, workoutToEdit.date);
+      workout.style.display = 'none';
+      form.classList.remove('hidden');
+      // hide the getting started instructions
+      instructions.classList.add('hide__instructions');
+      setTimeout(function () {
+        return form.style.display = 'grid';
+      }, 1000);
+      this._populateForm(workoutToEdit);
+      _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts).splice(_babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts).indexOf(workoutToEdit), 1);
+    }
+  }, {
+    key: "_getLocalStorage",
+    value: function _getLocalStorage() {
+      var _this4 = this;
+      // parse data using JSON
+      var data = JSON.parse(localStorage.getItem('workouts'));
+      // display workouts on the list
+      if (!data) return;
+      _babelRuntimeHelpersClassPrivateFieldSetDefault.default(this, _workouts, data);
+      _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts).forEach(function (workout) {
+        return _this4._renderWorkoutOnList(workout);
+      });
+    }
+  }, {
+    key: "_deleteWorkout",
+    value: function _deleteWorkout(e) {
+      if (!e.target.closest('.workout__delete')) return;
+      var workout = e.target.closest('.workout');
+      workout.style.display = 'none';
+      var workoutId = workout.dataset.id;
+      var workoutToDelete = _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts).find(function (workout) {
+        return workout.id === workoutId;
+      });
+      _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts).splice(_babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts).indexOf(workoutToDelete), 1);
+      _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _map).eachLayer(function (layer) {
+        if (layer.options.attribution) return;
+        layer.remove();
+      });
+      this._displayLocalStorageMapMarkers();
+      this._setLocalStorage();
+      this._checkExistingWorkouts();
+    }
+  }, {
+    key: "_deleteAllWorkouts",
+    value: function _deleteAllWorkouts(e) {
+      this.reset();
+    }
+  }, {
+    key: "_checkExistingWorkouts",
+    value: function _checkExistingWorkouts() {
+      if (_babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts).length < 1) {
+        deleteAll.style.display = 'none';
+        sortBy.style.display = 'none';
+      } else {
+        deleteAll.style.display = 'flex';
+        sortBy.style.display = 'flex';
+      }
+    }
+  }, {
+    key: "_sortByData",
+    value: function _sortByData(data) {
+      var _this5 = this;
+      var newOrder = _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts).sort(function (wa, wb) {
+        return wa[data] - wb[data];
+      });
+      var currentWorkouts = document.querySelectorAll('.workout');
+      currentWorkouts.forEach(function (el) {
+        return el.style.display = 'none';
+      });
+      newOrder.forEach(function (el) {
+        return _this5._renderWorkoutOnList(el);
+      });
+    }
+  }, {
+    key: "_sortByDate",
+    value: function _sortByDate() {
+      var _this6 = this;
+      var newOrder = _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts).sort(function (wa, wb) {
+        return new Date(wb.date) - new Date(wa.date);
+      });
+      var currentWorkouts = document.querySelectorAll('.workout');
+      currentWorkouts.forEach(function (el) {
+        return el.style.display = 'none';
+      });
+      newOrder.forEach(function (el) {
+        return _this6._renderWorkoutOnList(el);
+      });
+    }
+  }, {
+    key: "_sortBy",
+    value: function _sortBy() {
+      if (sortBy.value === 'distance') this._sortByData('distance');
+      if (sortBy.value === 'duration') this._sortByData('duration');
+      if (sortBy.value === 'date') this._sortByDate();
+    }
+  }, {
+    key: "reset",
+    value: function reset() {
+      // the only public method
+      // direct access in console through app object
+      localStorage.removeItem('workouts');
+      location.reload();
+    }
+  }]);
+  return App;
+})();
+var app = new App();
+
+},{"@babel/runtime/helpers/classPrivateFieldGet":"1AC5E","@babel/runtime/helpers/classPrivateFieldSet":"5gZMZ","@babel/runtime/helpers/assertThisInitialized":"1BXAs","@babel/runtime/helpers/inherits":"dNu3I","@babel/runtime/helpers/possibleConstructorReturn":"3vcut","@babel/runtime/helpers/getPrototypeOf":"7d4Cy","@babel/runtime/helpers/classCallCheck":"2bdFw","@babel/runtime/helpers/createClass":"2EITm","@babel/runtime/helpers/defineProperty":"5PI63","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"1AC5E":[function(require,module,exports) {
+function _classPrivateFieldGet(receiver, privateMap) {
+  var descriptor = privateMap.get(receiver);
+
+  if (!descriptor) {
+    throw new TypeError("attempted to get private field on non-instance");
   }
-  _populateForm(workout) {
-    inputType.value = workout.type;
-    inputDistance.value = workout.distance;
-    inputDuration.value = workout.duration;
-    this.#marker = L.marker(workout.coords).addTo(this.#map);
-    if (workout.type === 'running') {
-      inputCadence.value = workout.cadence;
-      inputCadence.closest('.form__row').classList.remove('form__row--hidden');
-      inputElevation.closest('.form__row').classList.add('form__row--hidden');
-    }
-    if (workout.type === 'cycling') {
-      inputElevation.value = workout.elevationGain;
-      inputElevation
-        .closest('.form__row')
-        .classList.remove('form__row--hidden');
-      inputCadence.closest('.form__row').classList.add('form__row--hidden');
-    }
-    inputDistance.focus();
+
+  if (descriptor.get) {
+    return descriptor.get.call(receiver);
   }
-  _checkExistingWorkoutDate = function () {
-    let date = new Date();
-    if (this.#workoutDate) {
-      date = this.#workoutDate;
-      this.#workoutDate = '';
+
+  return descriptor.value;
+}
+
+module.exports = _classPrivateFieldGet;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{}],"5gZMZ":[function(require,module,exports) {
+function _classPrivateFieldSet(receiver, privateMap, value) {
+  var descriptor = privateMap.get(receiver);
+
+  if (!descriptor) {
+    throw new TypeError("attempted to set private field on non-instance");
+  }
+
+  if (descriptor.set) {
+    descriptor.set.call(receiver, value);
+  } else {
+    if (!descriptor.writable) {
+      throw new TypeError("attempted to set read only private field");
     }
-    return new Date(date);
+
+    descriptor.value = value;
+  }
+
+  return value;
+}
+
+module.exports = _classPrivateFieldSet;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{}],"1BXAs":[function(require,module,exports) {
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+module.exports = _assertThisInitialized;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{}],"dNu3I":[function(require,module,exports) {
+var setPrototypeOf = require("./setPrototypeOf.js");
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) setPrototypeOf(subClass, superClass);
+}
+
+module.exports = _inherits;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{"./setPrototypeOf.js":"37Yld"}],"37Yld":[function(require,module,exports) {
+function _setPrototypeOf(o, p) {
+  module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
   };
-  _editWorkout(e) {
-    if (!e.target.closest('.workout__edit')) return;
-    const workout = e.target.closest('.workout');
-    const workoutId = workout.dataset.id;
-    const workoutToEdit = this.#workouts.find(
-      workout => workout.id === workoutId
-    );
-    this.#workoutDate = workoutToEdit.date;
-    workout.style.display = 'none';
-    form.classList.remove('hidden');
-    //hide the getting started instructions
-    instructions.classList.add('hide__instructions');
-    setTimeout(() => (form.style.display = 'grid'), 1000);
-    this._populateForm(workoutToEdit);
-    this.#workouts.splice(this.#workouts.indexOf(workoutToEdit), 1);
+
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
+  return _setPrototypeOf(o, p);
+}
+
+module.exports = _setPrototypeOf;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{}],"3vcut":[function(require,module,exports) {
+var _typeof = require("@babel/runtime/helpers/typeof")["default"];
+
+var assertThisInitialized = require("./assertThisInitialized.js");
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
   }
-  _getLocalStorage() {
-    //parse data using JSON
-    const data = JSON.parse(localStorage.getItem('workouts'));
-    //display workouts on the list
-    if (!data) return;
-    this.#workouts = data;
-    this.#workouts.forEach(workout => this._renderWorkoutOnList(workout));
+
+  return assertThisInitialized(self);
+}
+
+module.exports = _possibleConstructorReturn;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{"@babel/runtime/helpers/typeof":"3F8fn","./assertThisInitialized.js":"1BXAs"}],"3F8fn":[function(require,module,exports) {
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+
+    module.exports["default"] = module.exports, module.exports.__esModule = true;
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+
+    module.exports["default"] = module.exports, module.exports.__esModule = true;
   }
-  _deleteWorkout(e) {
-    if (!e.target.closest('.workout__delete')) return;
-    const workout = e.target.closest('.workout');
-    workout.style.display = 'none';
-    const workoutId = workout.dataset.id;
-    const workoutToDelete = this.#workouts.find(
-      workout => workout.id === workoutId
-    );
-    this.#workouts.splice(this.#workouts.indexOf(workoutToDelete), 1);
-    this.#map.eachLayer(function (layer) {
-      if (layer.options.attribution) return;
-      layer.remove();
-    });
-    this._displayLocalStorageMapMarkers();
-    this._setLocalStorage();
-    this._checkExistingWorkouts();
-  }
-  _deleteAllWorkouts(e) {
-    this.reset();
-  }
-  _checkExistingWorkouts() {
-    if (this.#workouts.length < 1) {
-      deleteAll.style.display = 'none';
-      sortBy.style.display = 'none';
-    } else {
-      deleteAll.style.display = 'flex';
-      sortBy.style.display = 'flex';
-    }
-  }
-  _sortByData(data) {
-    const newOrder = this.#workouts.sort((wa, wb) => wa[data] - wb[data]);
-    const currentWorkouts = document.querySelectorAll('.workout');
-    currentWorkouts.forEach(el => (el.style.display = 'none'));
-    newOrder.forEach(el => this._renderWorkoutOnList(el));
-  }
-  _sortByDate() {
-    const newOrder = this.#workouts.sort(
-      (wa, wb) => new Date(wb.date) - new Date(wa.date)
-    );
-    const currentWorkouts = document.querySelectorAll('.workout');
-    currentWorkouts.forEach(el => (el.style.display = 'none'));
-    newOrder.forEach(el => this._renderWorkoutOnList(el));
-  }
-  _sortBy() {
-    if (sortBy.value === 'distance') this._sortByData('distance');
-    if (sortBy.value === 'duration') this._sortByData('duration');
-    if (sortBy.value === 'date') this._sortByDate();
-  }
-  reset() {
-    //the only public method
-    //direct access in console through app object
-    localStorage.removeItem('workouts');
-    location.reload();
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{}],"7d4Cy":[function(require,module,exports) {
+function _getPrototypeOf(o) {
+  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  module.exports["default"] = module.exports, module.exports.__esModule = true;
+  return _getPrototypeOf(o);
+}
+
+module.exports = _getPrototypeOf;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{}],"2bdFw":[function(require,module,exports) {
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
   }
 }
-const app = new App();
 
+module.exports = _classCallCheck;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{}],"2EITm":[function(require,module,exports) {
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+module.exports = _createClass;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{}],"5PI63":[function(require,module,exports) {
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+},{}],"5gA8y":[function(require,module,exports) {
+"use strict";
+
+exports.interopDefault = function (a) {
+  return a && a.__esModule ? a : {
+    default: a
+  };
+};
+
+exports.defineInteropFlag = function (a) {
+  Object.defineProperty(a, '__esModule', {
+    value: true
+  });
+};
+
+exports.exportAll = function (source, dest) {
+  Object.keys(source).forEach(function (key) {
+    if (key === 'default' || key === '__esModule') {
+      return;
+    } // Skip duplicate re-exports when they have the same value.
+
+
+    if (key in dest && dest[key] === source[key]) {
+      return;
+    }
+
+    Object.defineProperty(dest, key, {
+      enumerable: true,
+      get: function () {
+        return source[key];
+      }
+    });
+  });
+  return dest;
+};
+
+exports.export = function (dest, destName, get) {
+  Object.defineProperty(dest, destName, {
+    enumerable: true,
+    get: get
+  });
+};
 },{}]},["90vTS","7qT7c"], "7qT7c", "parcelRequire2526")
 
 //# sourceMappingURL=index.56f57d74.js.map

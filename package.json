@@ -2,14 +2,17 @@
   "name": "workout-logger",
   "version": "1.0.0",
   "description": "Log your cycling and running workouts anywhere in the world with Workout Logger",
-  "main": "index.html",
+  "main": "production/index.html",
+  "source": "index.html",
+  "targets": {
+
+  },
   "scripts": {
-    "start": "parcel serve index.html",
+    "start": "parcel serve index.html --open",
     "build": "parcel build index.html"
   },
   "staticFiles": {
-    "staticPath": "assets",
-    "watcherGlob": "**"
+    "staticPath": "assets"
   },
   "repository": {
     "type": "git",
@@ -43,8 +46,10 @@
     "@parcel/transformer-postcss": "^2.0.0-nightly.617",
     "@parcel/transformer-posthtml": "^2.0.0-nightly.617",
     "parcel": "^2.0.0-nightly.615",
-    "parcel-plugin-static-files-copy": "^2.5.1",
+    "parcel-reporter-static-files-copy": "^1.2.1",
     "postcss": "^8.2.7"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@parcel/babel-plugin-transform-runtime": "^2.0.0-nightly.1823"
+  }
 }
