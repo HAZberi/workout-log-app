@@ -299,8 +299,11 @@ class App {
   }
   _displayLocalStorageMapMarkers() {
     //display and set workouts markers on the map, if any when the map loads for the first time
-    if (!this.#workouts.length > 1)
+    if (!this.#workouts.length >= 1){
       return console.log(`No workouts found in local storage`);
+    }
+    //hide the getting started instructions
+    instructions.classList.add('hide__instructions');
     this.#workouts.forEach(workout => {
       this.#marker = L.marker(workout.coords).addTo(this.#map);
       this._renderWorkoutOnMap(workout);

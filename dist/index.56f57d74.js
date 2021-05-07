@@ -810,7 +810,11 @@ var App = /*#__PURE__*/(function () {
     value: function _displayLocalStorageMapMarkers() {
       var _this3 = this;
       // display and set workouts markers on the map, if any when the map loads for the first time
-      if (!_babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts).length > 1) return console.log("No workouts found in local storage");
+      if (!_babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts).length >= 1) {
+        return console.log("No workouts found in local storage");
+      }
+      // hide the getting started instructions
+      instructions.classList.add('hide__instructions');
       _babelRuntimeHelpersClassPrivateFieldGetDefault.default(this, _workouts).forEach(function (workout) {
         _babelRuntimeHelpersClassPrivateFieldSetDefault.default(_this3, _marker, L.marker(workout.coords).addTo(_babelRuntimeHelpersClassPrivateFieldGetDefault.default(_this3, _map)));
         _this3._renderWorkoutOnMap(workout);

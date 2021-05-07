@@ -4,9 +4,7 @@
   "description": "Log your cycling and running workouts anywhere in the world with Workout Logger",
   "main": "production/index.html",
   "source": "index.html",
-  "targets": {
-
-  },
+  "targets": {},
   "scripts": {
     "start": "parcel serve index.html --open",
     "build": "parcel build index.html"
